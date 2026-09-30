@@ -1,0 +1,18 @@
+package com.qjq.mall.dto;
+
+import com.qjq.mall.model.PmsProduct;
+import com.qjq.mall.model.SmsFlashPromotionProductRelation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * 限时购及商品信息封装
+ * Created by macro on 2018/11/16.
+ */
+public class SmsFlashPromotionProduct extends SmsFlashPromotionProductRelation{
+    @Getter
+    @Setter
+    @Schema(title = "关联商品")
+    private PmsProduct product;
+}

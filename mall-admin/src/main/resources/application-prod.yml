@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.1
+    nacos:
+      discovery:
+        server-addr: 119.29.167.133:8848
+      config:
+        server-addr: 119.29.167.133:8848
+        file-extension: yaml
+  config:
+    import:
+      - nacos:mall-admin-prod.yaml?refreshEnabled=true
