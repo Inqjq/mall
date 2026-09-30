@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 192.168.1
+    nacos:
+      discovery:
+        server-addr: http://119.29.167.133:8848
