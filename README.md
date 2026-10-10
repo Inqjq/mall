@@ -228,7 +228,3 @@ src/
 ├── layout/            # （管理端）侧边栏 + 顶栏布局
 └── views/             # 页面组件
 ```
-
-## 九、License
-
-基于 [macrozheng/mall-swarm](https://github.com/macrozheng/mall-swarm) 学习改造，遵循 MIT License。
