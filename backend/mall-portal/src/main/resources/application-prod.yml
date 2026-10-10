@@ -2,13 +2,17 @@ spring:
   cloud:
     inetutils:
       preferred-networks:
-        - 192.168.1
+        - 172.20
     nacos:
       discovery:
         server-addr: 119.29.167.133:8848
       config:
         server-addr: 119.29.167.133:8848
         file-extension: yaml
+  datasource:
+    url: jdbc:mysql://db:3306/mall-swarm?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
   config:
     import:
-      - nacos:mall-portal-prod.yaml?refreshEnabled=true
+      - optional:nacos:mall-portal-prod.yaml?refreshEnabled=true

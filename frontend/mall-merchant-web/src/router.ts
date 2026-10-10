@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const tokenKey = 'mall_merchant_token'
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/login', component: () => import('./views/Login.vue'), meta: { title: '商家登录' } },
     { path: '/', component: () => import('./Shell.vue'), redirect: '/overview', children: [

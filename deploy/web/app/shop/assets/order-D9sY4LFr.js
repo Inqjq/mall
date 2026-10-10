@@ -1,0 +1,1 @@
+import{x as e}from"./index-DWVR-sF5.js";function o(){return e({url:"/mall-portal/member/address/list",method:"get"})}function a(r){return e({url:"/mall-portal/order/generateOrder",method:"post",data:r})}function l(r){return e({url:"/mall-portal/order/list",method:"get",params:r})}export{a,l as b,o as g};

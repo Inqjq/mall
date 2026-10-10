@@ -1,0 +1,1 @@
+function i(t){if(t==null||t==="")return"—";const e=t instanceof Date?t:new Date(typeof t=="string"&&!t.includes("T")?t.replace(" ","T"):String(t));if(!Number.isFinite(e.getTime()))return String(t);const n=r=>String(r).padStart(2,"0");return`${e.getFullYear()}-${n(e.getMonth()+1)}-${n(e.getDate())} ${n(e.getHours())}:${n(e.getMinutes())}:${n(e.getSeconds())}`}export{i as f};

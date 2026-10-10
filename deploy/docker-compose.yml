@@ -1,0 +1,157 @@
+name: mall-swarm
+
+services:
+  db:
+    image: mysql:8.0.44
+    container_name: mall-mysql
+    restart: always
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb_buffer_pool_size=128M
+      - --performance-schema=OFF
+      - --max_connections=100
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+      TZ: Asia/Shanghai
+    ports:
+      - "127.0.0.1:3307:3306" # 仅本机/SSH 隧道调试，不暴露公网
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks: [mall-net]
+
+  mongodb:
+    image: mongo:6
+    container_name: mongodb
+    restart: always
+    command: ["mongod", "--bind_ip_all"] # 原容器只绑 127.0.0.1，容器间不可达；这里放开容器网络
+    volumes:
+      - /opt/mall-swarm/mongodb/data:/data/db
+    ports:
+      - "127.0.0.1:27017:27017" # 仅宿主可达，不暴露公网（无鉴权）
+    networks: [mall-net]
+
+  mall-gateway:
+    build:
+      context: ./java
+      args: { JAR_NAME: mall-gateway.jar }
+    image: mall/gateway:latest
+    container_name: mall-gateway
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms96m -Xmx224m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom"
+    depends_on:
+      db: { condition: service_healthy }
+    networks: [mall-net]
+
+  mall-auth:
+    build:
+      context: ./java
+      args: { JAR_NAME: mall-auth.jar }
+    image: mall/auth:latest
+    container_name: mall-auth
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms96m -Xmx192m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom"
+    depends_on:
+      db: { condition: service_healthy }
+    networks: [mall-net]
+
+  mall-admin:
+    build:
+      context: ./java
+      args: { JAR_NAME: mall-admin.jar }
+    image: mall/admin:latest
+    container_name: mall-admin
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms96m -Xmx192m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom"
+    depends_on:
+      db: { condition: service_healthy }
+    networks: [mall-net]
+
+  mall-portal:
+    build:
+      context: ./java
+      args: { JAR_NAME: mall-portal.jar }
+    image: mall/portal:latest
+    container_name: mall-portal
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms96m -Xmx192m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom"
+      SPRING_DATA_MONGODB_HOST: mongodb # 走 mall-net 容器名解析（原 119.29.167.133 因 mongo 只绑 127.0.0.1 不可达）
+    depends_on:
+      db: { condition: service_healthy }
+    networks: [mall-net]
+
+  mall-search:
+    build:
+      context: ./java
+      args: { JAR_NAME: mall-search.jar }
+    image: mall/search:latest
+    container_name: mall-search
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      JAVA_OPTS: "-Xms96m -Xmx192m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -XX:+ExitOnOutOfMemoryError -Djava.security.egd=file:/dev/./urandom"
+    depends_on:
+      db: { condition: service_healthy }
+    networks: [mall-net]
+
+  mall-ai-agent:
+    build:
+      context: ../ai/mall-ai-agent
+      dockerfile: ../../deploy/agent/Dockerfile
+    image: mall/ai-agent:latest
+    container_name: mall-ai-agent
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+      NACOS_SERVER: 119.29.167.133:8848
+      NACOS_NAMESPACE: public
+      NACOS_GROUP: DEFAULT_GROUP
+      APP_NAME: mall-ai-agent
+      APP_HOST: 0.0.0.0
+      APP_PORT: "8500"
+      LLM_API_KEY: ${LLM_API_KEY}
+      LLM_BASE_URL: ${LLM_BASE_URL}
+      LLM_MODEL: ${LLM_MODEL}
+      MALL_GATEWAY_BASE_URL: http://mall-gateway:8201
+    networks: [mall-net]
+
+  nginx:
+    image: nginx:1.25
+    container_name: mall-nginx
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8088:80" # 商城 H5（公网直连；宿主 80/8080 已被其他项目占用）
+      - "8090:8090" # 管理端
+      - "8093:8093" # 商家端
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./web/admin:/usr/share/nginx/html/admin:ro
+      - ./web/app:/usr/share/nginx/html/app:ro
+      - ./web/merchant:/usr/share/nginx/html/merchant:ro
+    depends_on:
+      - mall-gateway
+      - mall-ai-agent
+    networks: [mall-net]
+
+networks:
+  mall-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/16 # 避开服务器上已有的 172.17-172.22 Docker 网络

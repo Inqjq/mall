@@ -2,7 +2,7 @@ spring:
   cloud:
     inetutils:
       preferred-networks:
-        - 192.168.1
+        - 172.20
     nacos:
       discovery:
         server-addr: 119.29.167.133:8848
@@ -11,4 +11,4 @@ spring:
         file-extension: yaml
   config:
     import:
-      - nacos:mall-auth-prod.yaml?refreshEnabled=true
+      - optional:nacos:mall-auth-prod.yaml?refreshEnabled=true

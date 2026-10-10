@@ -3,7 +3,7 @@ import { getToken } from '@/utils/request'
 import { usePermissionStore } from '@/stores/permission'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/login', name: 'login', component: () => import('@/views/login/index.vue'), meta: { title: '登录' } },
     {

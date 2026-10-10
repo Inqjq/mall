@@ -59,7 +59,7 @@ type Message = { id: number; role: 'assistant' | 'user'; text: string; links?: L
 // apiBase：mall-ai-agent 服务地址；getToken：可选，返回完整 Authorization 头值（含 Bearer 前缀），由嵌入方按所在端提供
 const props = withDefaults(
   defineProps<{ role: Role; apiBase?: string; getToken?: () => string | null }>(),
-  { apiBase: 'http://localhost:8500', getToken: undefined },
+  { apiBase: '/agent', getToken: undefined },
 )
 const configByRole = {
   admin: {
@@ -92,7 +92,13 @@ const messageList = ref<HTMLElement>()
 const dockRef = ref<HTMLElement>()
 let pointerStart: { x: number; y: number; right: number; bottom: number } | undefined
 let messageId = 1
-let sessionId = crypto.randomUUID()
+/** crypto.randomUUID 仅在安全上下文（HTTPS/localhost）可用，HTTP 外网部署时降级生成 */
+// 2026-10-10 部署修复：HTTP 环境下 sessionId 降级，避免组件初始化即崩溃
+function genSessionId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  return `sess-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`
+}
+let sessionId = genSessionId()
 let idleTimer: ReturnType<typeof setTimeout> | undefined
 const messages = ref<Message[]>([{ id: messageId++, role: 'assistant', text: welcomeFor(props.role) }])
 const dockStyle = computed(() => ({ right: `${position.value.right}px`, bottom: `${position.value.bottom}px` }))

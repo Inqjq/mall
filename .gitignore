@@ -10,7 +10,6 @@ target/
 .classpath
 .project
 
-README.md
 
 # Node / 前端 #
 node_modules/
@@ -28,3 +27,8 @@ logs/
 *.log
 
 .DS_Store
+
+# 部署产物 / 敏感文件 #
+deploy/certs/
+deploy/java/*.jar
+deploy-bundle.tgz

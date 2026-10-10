@@ -4,6 +4,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/mall-admin/',
   plugins: [vue()],
   resolve: {
     alias: {
@@ -18,6 +19,11 @@ export default defineConfig({
         target: 'http://localhost:8201',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/gateway/, ''),
+      },
+      // AI 客服（mall-ai-agent）；生产环境由 nginx 做同样转发
+      '/agent': {
+        target: 'http://localhost:8500',
+        changeOrigin: true,
       },
     },
   },
