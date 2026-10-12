@@ -66,7 +66,14 @@ function Icon({ name, size = 40, color = '#1d2129', strokeWidth = 2, className }
     return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
   }, [name, color, strokeWidth])
 
-  return <Image className={className} src={src} style={{ width: `${size}rpx`, height: `${size}rpx` }} />
+  // H5 不会转换 JS 内联样式里的 rpx（只处理 .scss），尺寸会失效导致图标被撑成默认大小，
+  // 因此 H5 用等价的 vw 换算（size rpx === size/750*100 vw），两端尺寸一致且随屏幕自适应
+  const iconSize = useMemo(
+    () => (process.env.TARO_ENV === 'h5' ? `${((size / 750) * 100).toFixed(4)}vw` : `${size}rpx`),
+    [size],
+  )
+
+  return <Image className={className} src={src} style={{ width: iconSize, height: iconSize }} />
 }
 
 export default Icon
