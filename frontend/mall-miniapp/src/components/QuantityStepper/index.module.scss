@@ -1,0 +1,59 @@
+@use '@/styles/variables.scss' as *;
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn {
+  @include flex-center;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: $radius-sm;
+  background: $color-bg-hover;
+  transition: opacity $transition-fast;
+
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.stepperSmall .btn {
+  width: 44rpx;
+  height: 44rpx;
+}
+
+.btnDisabled {
+  opacity: 0.35;
+}
+
+.btnText {
+  font-size: 30rpx;
+  color: $color-text-secondary;
+  line-height: 1;
+}
+
+.stepperSmall .btnText {
+  font-size: $font-size-md;
+}
+
+.btnPlus {
+  background: $color-primary-soft;
+}
+
+.plusText {
+  color: $color-primary;
+}
+
+.value {
+  min-width: 72rpx;
+  text-align: center;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.stepperSmall .value {
+  min-width: 56rpx;
+  font-size: $font-size-sm;
+}

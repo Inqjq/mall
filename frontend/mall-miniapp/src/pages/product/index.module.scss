@@ -1,0 +1,249 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pageLoading {
+  padding: 200rpx 0;
+  text-align: center;
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}
+
+/* ===== 商品图 ===== */
+.gallery {
+  height: 750rpx;
+  background: $color-bg-hover;
+}
+
+.galleryPic {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== 主信息 ===== */
+.mainCard {
+  margin: 24rpx 32rpx 0;
+  padding: 32rpx;
+  border-radius: $radius-xl;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+}
+
+.priceSymbol {
+  color: $color-price;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+}
+
+.price {
+  color: $color-price;
+  font-size: 52rpx;
+  font-weight: $font-weight-bold;
+  line-height: 1.1;
+}
+
+.original {
+  margin-left: 16rpx;
+  color: $color-text-disabled;
+  font-size: $font-size-sm;
+  text-decoration: line-through;
+}
+
+.sale {
+  margin-left: auto;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.name {
+  display: block;
+  margin-top: 20rpx;
+  font-size: 34rpx;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  line-height: $line-height-normal;
+}
+
+.subTitle {
+  display: block;
+  margin-top: 12rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  @include text-ellipsis-multi(2);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 24rpx;
+  margin-right: -12rpx;
+}
+
+.badge {
+  padding: 6rpx 16rpx;
+  margin-right: 12rpx;
+  margin-bottom: 8rpx;
+  border-radius: $radius-xs;
+  background: $color-primary-soft;
+  color: $color-primary;
+  font-size: 20rpx;
+  white-space: nowrap;
+}
+
+/* ===== 规格 ===== */
+.specCard {
+  margin: 24rpx 32rpx 0;
+  border-radius: $radius-xl;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.specRow {
+  display: flex;
+  align-items: center;
+  padding: 28rpx 32rpx;
+}
+
+.specLabel {
+  width: 140rpx;
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.specValueCol {
+  flex: 1;
+  min-width: 0;
+}
+
+.specValue {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.specArrow {
+  margin-left: 12rpx;
+  color: $color-text-disabled;
+  font-size: $font-size-lg;
+}
+
+.specDivider {
+  height: 2rpx;
+  margin: 0 32rpx;
+  background: $color-divider;
+}
+
+/* ===== 富文本详情 ===== */
+.detailCard {
+  margin: 24rpx 32rpx 0;
+  padding: 32rpx;
+  border-radius: $radius-xl;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.detailTitle {
+  display: block;
+  margin-bottom: 24rpx;
+  font-size: 32rpx;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.richContent {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
+
+.bottomSpace {
+  height: 160rpx;
+}
+
+/* ===== 底部操作栏 ===== */
+.actionBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx calc(16rpx + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+
+.actionIconCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 88rpx;
+
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+.actionIcon {
+  font-size: 36rpx;
+  line-height: 1;
+}
+
+.actionIconText {
+  margin-top: 6rpx;
+  font-size: 20rpx;
+  color: $color-text-tertiary;
+}
+
+.actionBtnCart {
+  @include flex-center;
+  flex: 1;
+  height: $button-height-lg;
+  margin-left: 16rpx;
+  border-radius: $radius-button 0 0 $radius-button;
+  background: linear-gradient(135deg, #ffb340 0%, #ff7a45 100%);
+
+  &:active {
+    opacity: 0.92;
+  }
+}
+
+.actionBtnCartText {
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+}
+
+.actionBtnBuy {
+  @include flex-center;
+  flex: 1;
+  height: $button-height-lg;
+  margin-left: 2rpx;
+  border-radius: 0 $radius-button $radius-button 0;
+  background: linear-gradient(135deg, #ff5f52 0%, #e1251b 100%);
+
+  &:active {
+    opacity: 0.92;
+  }
+}
+
+.actionBtnBuyText {
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+}

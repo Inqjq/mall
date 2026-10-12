@@ -1,0 +1,193 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: $color-bg-page;
+}
+
+/* ===== 消息区 ===== */
+.chatArea {
+  flex: 1;
+  min-height: 0;
+}
+
+.msgList {
+  padding: 24rpx 32rpx;
+}
+
+.rowUser {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 28rpx;
+}
+
+.rowAgent {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 28rpx;
+}
+
+.agentAvatar {
+  @include flex-center;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: $radius-round;
+  background: $color-primary-soft;
+  border: 2rpx solid rgba(225, 37, 27, 0.14);
+  flex-shrink: 0;
+}
+
+.bubbleUser {
+  max-width: 76%;
+  padding: 20rpx 26rpx;
+  border-radius: $radius-lg $radius-xs $radius-lg $radius-lg;
+  background: $gradient-primary;
+  box-shadow: 0 4rpx 12rpx rgba(225, 37, 27, 0.18);
+}
+
+.bubbleUserText {
+  color: $color-text-white;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  word-break: break-all;
+}
+
+.bubbleAgent {
+  max-width: 76%;
+  margin-left: 16rpx;
+  padding: 20rpx 26rpx;
+  border-radius: $radius-xs $radius-lg $radius-lg $radius-lg;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+}
+
+.bubbleAgentText {
+  color: $color-text-primary;
+  font-size: $font-size-md;
+  line-height: $line-height-normal;
+  word-break: break-all;
+}
+
+.typingText {
+  color: $color-text-tertiary;
+  font-size: $font-size-md;
+}
+
+/* ===== 消息内链接 ===== */
+.linkRow {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 18rpx;
+}
+
+.linkPill {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 22rpx;
+  margin: 0 14rpx 14rpx 0;
+  border-radius: $radius-button;
+  background: $color-primary-soft;
+
+  &:active {
+    opacity: 0.78;
+  }
+}
+
+.linkText {
+  color: $color-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}
+
+.linkArrow {
+  margin-left: 6rpx;
+  color: $color-primary;
+  font-size: $font-size-sm;
+}
+
+/* ===== 建议问题 ===== */
+.suggestBar {
+  flex-shrink: 0;
+  width: 100%;
+  background: $color-bg-page;
+  @include scroll-x-container;
+}
+
+.suggestRow {
+  @include scroll-x-container;
+  display: flex;
+  padding: 8rpx 32rpx;
+}
+
+.suggestChip {
+  flex-shrink: 0;
+  padding: 12rpx 26rpx;
+  margin-right: 16rpx;
+  border-radius: $radius-button;
+  background: $color-bg-card;
+  border: 2rpx solid $color-border;
+
+  &:active {
+    background: $color-primary-soft;
+    border-color: rgba(225, 37, 27, 0.24);
+  }
+}
+
+.suggestText {
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  white-space: nowrap;
+}
+
+/* ===== 输入栏 ===== */
+.inputBar {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background: $color-bg-card;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 72rpx;
+  padding: 0 28rpx;
+  border-radius: $radius-button;
+  background: $color-bg-hover;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+}
+
+.placeholder {
+  color: $color-text-disabled;
+  font-size: $font-size-md;
+}
+
+.sendBtn {
+  @include flex-center;
+  width: 128rpx;
+  height: 72rpx;
+  margin-left: 20rpx;
+  border-radius: $radius-button;
+  background: $gradient-primary;
+  flex-shrink: 0;
+
+  &:active {
+    opacity: 0.88;
+  }
+}
+
+.sendDisabled {
+  opacity: 0.5;
+}
+
+.sendText {
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}

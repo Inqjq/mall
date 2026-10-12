@@ -1,0 +1,42 @@
+// ============================================
+// 主题配色变量（Mall 商城 · 品牌红）
+// ============================================
+
+// 品牌主题色：与商城 H5 端一致的品牌红
+$color-primary: #e1251b;
+$color-primary-light: #ff7a45;
+$color-primary-dark: #c0160d;
+
+// 功能色
+$color-success: #00b42a;
+$color-warning: #ff7d00;
+$color-error: #f53f3f;
+$color-info: #e1251b;
+
+// 背景色
+$color-bg-page: #f5f6f8;
+$color-bg-card: #ffffff;
+$color-bg-hover: #f2f3f5;
+
+// 文本色
+$color-text-primary: #1d2129;
+$color-text-secondary: #4e5969;
+$color-text-tertiary: #86909c;
+$color-text-disabled: #c9cdd4;
+$color-text-white: #ffffff;
+
+// 边框色
+$color-border: #e5e6eb;
+$color-divider: #f2f3f5;
+
+// ============================================
+// 业务扩展变量
+// ============================================
+// 价格强调色
+$color-price: #e1251b;
+// 主色浅底（标签、提示底色）
+$color-primary-soft: #fdeeeb;
+// 品牌主渐变（按钮 / 头部）
+$gradient-primary: linear-gradient(135deg, #ff7a45 0%, #e1251b 100%);
+// 秒杀区深底渐变
+$gradient-flash: linear-gradient(150deg, #46201a 0%, #221210 100%);

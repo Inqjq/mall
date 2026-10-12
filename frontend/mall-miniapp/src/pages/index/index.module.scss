@@ -1,0 +1,510 @@
+@use '@/styles/variables.scss' as *;
+
+.page {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: 48rpx;
+  overflow: hidden;
+}
+
+/* ===== 沉浸式头部 ===== */
+.hero {
+  padding: 0 32rpx 96rpx;
+  background: $gradient-primary;
+  border-radius: 0 0 48rpx 48rpx;
+}
+
+.navRow {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+}
+
+.brand {
+  margin-right: 20rpx;
+  color: $color-text-white;
+  font-size: 38rpx;
+  font-weight: $font-weight-bold;
+  letter-spacing: 1rpx;
+}
+
+.searchBar {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  height: 64rpx;
+  padding: 0 28rpx;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 4rpx 16rpx rgba(160, 20, 10, 0.18);
+
+  &:active {
+    opacity: 0.92;
+  }
+}
+
+.searchIcon {
+  font-size: 26rpx;
+  margin-right: 12rpx;
+  line-height: 1;
+}
+
+.searchPlaceholder {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.serviceBtn {
+  @include flex-center;
+  width: 64rpx;
+  height: 64rpx;
+  margin-left: 16rpx;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2rpx solid rgba(255, 255, 255, 0.4);
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.serviceIcon {
+  font-size: 30rpx;
+  line-height: 1;
+}
+
+/* ===== Banner ===== */
+.banner {
+  height: 300rpx;
+  margin-top: 20rpx;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.bannerItem {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: $radius-lg;
+  overflow: hidden;
+}
+
+.bannerPic {
+  width: 100%;
+  height: 100%;
+}
+
+.bannerTitle {
+  position: absolute;
+  left: 20rpx;
+  bottom: 20rpx;
+  max-width: 70%;
+  padding: 8rpx 18rpx;
+  border-radius: $radius-round;
+  background: rgba(0, 0, 0, 0.38);
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  @include text-ellipsis;
+}
+
+/* ===== 分类快捷入口 ===== */
+.quickCard {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -64rpx 32rpx 0;
+  padding: 32rpx 8rpx 12rpx;
+  border-radius: $radius-xl;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+  position: relative;
+  z-index: 2;
+}
+
+.quickItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  margin-bottom: 24rpx;
+
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.quickIconWrap {
+  @include flex-center;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 28rpx;
+  overflow: hidden;
+  background: $color-bg-hover;
+}
+
+.quickPic {
+  width: 100%;
+  height: 100%;
+}
+
+.quickName {
+  margin-top: 12rpx;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  @include text-ellipsis;
+  max-width: 100%;
+}
+
+/* ===== 限时秒杀 ===== */
+.flashCard {
+  margin: 24rpx 32rpx 0;
+  padding: 24rpx;
+  border-radius: $radius-xl;
+  background: $gradient-flash;
+  box-shadow: 0 6rpx 24rpx rgba(34, 18, 16, 0.28);
+}
+
+.flashHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flashTitle {
+  display: flex;
+  align-items: center;
+}
+
+.flashIcon {
+  font-size: 30rpx;
+  margin-right: 8rpx;
+  line-height: 1;
+}
+
+.flashName {
+  color: $color-text-white;
+  font-size: 34rpx;
+  font-weight: $font-weight-bold;
+}
+
+.flashTag {
+  margin-left: 12rpx;
+  padding: 4rpx 12rpx;
+  border-radius: $radius-xs;
+  background: rgba(255, 124, 0, 0.22);
+  color: #ffc59b;
+  font-size: $font-size-xs;
+}
+
+.flashRight {
+  display: flex;
+  align-items: center;
+}
+
+.flashMore {
+  margin-left: 16rpx;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: $font-size-xs;
+}
+
+.flashScroll {
+  margin-top: 20rpx;
+  width: 100%;
+  @include scroll-x-container;
+}
+
+.flashRow {
+  @include scroll-x-container;
+}
+
+.flashItem {
+  @include scroll-x-item(208rpx);
+  margin-right: 16rpx;
+  padding-bottom: 8rpx;
+  border-radius: $radius-md;
+  background: #ffffff;
+  overflow: hidden;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.flashPic {
+  display: block;
+  width: 208rpx;
+  height: 208rpx;
+  background: $color-bg-hover;
+}
+
+.flashProductName {
+  display: block;
+  padding: 12rpx 16rpx 0;
+  font-size: $font-size-xs;
+  color: $color-text-primary;
+  line-height: $line-height-tight;
+  @include text-ellipsis-multi(2);
+  height: 62rpx;
+}
+
+.flashPriceRow {
+  display: flex;
+  align-items: baseline;
+  padding: 8rpx 16rpx 0;
+}
+
+.flashPrice {
+  color: $color-price;
+  font-size: 30rpx;
+  font-weight: $font-weight-bold;
+}
+
+.flashOriginal {
+  margin-left: 8rpx;
+  color: $color-text-disabled;
+  font-size: 20rpx;
+  text-decoration: line-through;
+}
+
+.flashLimit {
+  display: inline-block;
+  margin: 10rpx 16rpx 4rpx;
+  padding: 2rpx 10rpx;
+  border-radius: $radius-xs;
+  background: $color-primary-soft;
+  color: $color-primary;
+  font-size: 20rpx;
+}
+
+/* ===== 品牌馆 ===== */
+.brandCard {
+  margin: 24rpx 32rpx 0;
+  padding: 24rpx 24rpx 8rpx;
+  border-radius: $radius-xl;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+}
+
+.brandHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.brandTitle {
+  font-size: 32rpx;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.brandMore {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.brandScroll {
+  width: 100%;
+  @include scroll-x-container;
+}
+
+.brandRow {
+  @include scroll-x-container;
+  padding-bottom: 16rpx;
+}
+
+.brandItem {
+  @include scroll-x-item(128rpx);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 24rpx;
+
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.brandLogo {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 24rpx;
+  background: $color-bg-hover;
+}
+
+.brandName {
+  margin-top: 12rpx;
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  @include text-ellipsis;
+  max-width: 128rpx;
+}
+
+/* ===== 专题精选 ===== */
+.subjectScroll {
+  width: 100%;
+  @include scroll-x-container;
+}
+
+.subjectRow {
+  @include scroll-x-container;
+}
+
+.subjectItem {
+  @include scroll-x-item(312rpx);
+  margin-right: 16rpx;
+  border-radius: $radius-lg;
+  background: $color-bg-card;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.subjectPic {
+  display: block;
+  width: 312rpx;
+  height: 176rpx;
+  background: $color-bg-hover;
+}
+
+.subjectInfo {
+  padding: 16rpx 20rpx 20rpx;
+}
+
+.subjectTitle {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.subjectCate {
+  display: inline-block;
+  margin-top: 10rpx;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-xs;
+  background: $color-bg-hover;
+  color: $color-text-tertiary;
+  font-size: 20rpx;
+}
+
+/* ===== 通用区块 ===== */
+.section {
+  margin-top: 40rpx;
+  padding: 0 32rpx;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+}
+
+.sectionBar {
+  width: 8rpx;
+  height: 44rpx;
+  margin-right: 16rpx;
+  border-radius: $radius-round;
+  background: $gradient-primary;
+}
+
+.sectionNameCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionName {
+  font-size: 34rpx;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  line-height: 1.2;
+}
+
+.sectionSub {
+  margin-top: 4rpx;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.sectionMore {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -16rpx;
+}
+
+.gridItem {
+  width: calc(50% - 16rpx);
+  margin-right: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+/* ===== 其他 ===== */
+.loading {
+  padding: 80rpx 0;
+  text-align: center;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.footer {
+  padding: 32rpx 0 16rpx;
+  text-align: center;
+}
+
+.footerText {
+  color: $color-text-disabled;
+  font-size: $font-size-xs;
+}
+
+/* 热销榜悬浮入口 */
+.hotFloat {
+  position: fixed;
+  right: 24rpx;
+  bottom: 220rpx;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 104rpx;
+  padding: 16rpx 0 12rpx;
+  border-radius: $radius-lg;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: $shadow-float;
+
+  &:active {
+    transform: scale(0.95);
+    opacity: 0.9;
+  }
+}
+
+.hotFloatIcon {
+  font-size: 36rpx;
+  line-height: 1;
+}
+
+.hotFloatText {
+  margin-top: 6rpx;
+  color: $color-text-primary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.hotFloatSale {
+  margin-top: 4rpx;
+  color: $color-price;
+  font-size: 20rpx;
+}

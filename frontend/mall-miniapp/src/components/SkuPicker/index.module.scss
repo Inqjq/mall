@@ -1,0 +1,183 @@
+@use '@/styles/variables.scss' as *;
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $transition-base, visibility $transition-base;
+}
+
+.maskVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 78vh;
+  border-radius: $radius-xl $radius-xl 0 0;
+  background: $color-bg-card;
+  transform: translateY(100%);
+  transition: transform $transition-base;
+}
+
+.panelVisible {
+  transform: translateY(0);
+}
+
+.header {
+  position: relative;
+  display: flex;
+  padding: 32rpx 32rpx 24rpx;
+}
+
+.pic {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: $radius-md;
+  background: $color-bg-hover;
+  border: 4rpx solid $color-bg-card;
+  box-shadow: $shadow-card;
+}
+
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-left: 24rpx;
+  padding-right: 64rpx;
+}
+
+.price {
+  color: $color-price;
+  font-size: 40rpx;
+  font-weight: $font-weight-bold;
+  line-height: 1.2;
+}
+
+.stock {
+  margin-top: 10rpx;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.selected {
+  margin-top: 8rpx;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  @include text-ellipsis;
+}
+
+.close {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+  @include flex-center;
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: $radius-round;
+  background: $color-bg-hover;
+}
+
+.closeText {
+  font-size: 36rpx;
+  color: $color-text-tertiary;
+  line-height: 1;
+}
+
+.body {
+  flex: 1;
+  min-height: 0;
+  max-height: 46vh;
+  padding: 8rpx 32rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.group {
+  margin-bottom: 24rpx;
+}
+
+.groupLabel {
+  display: block;
+  margin-bottom: 16rpx;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.values {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -16rpx;
+}
+
+.valueItem {
+  padding: 12rpx 32rpx;
+  margin: 0 16rpx 16rpx 0;
+  border-radius: $radius-button;
+  background: $color-bg-hover;
+  border: 2rpx solid transparent;
+  transition: all $transition-fast;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.valueActive {
+  background: $color-primary-soft;
+  border-color: $color-primary;
+}
+
+.valueText {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  white-space: nowrap;
+}
+
+.valueActive .valueText {
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.quantityRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8rpx;
+}
+
+.footer {
+  padding: 16rpx 32rpx calc(24rpx + env(safe-area-inset-bottom));
+}
+
+.confirmBtn {
+  @include flex-center;
+  height: $button-height-lg;
+  border-radius: $radius-button;
+  background: $gradient-primary;
+  transition: opacity $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.confirmText {
+  color: $color-text-white;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  white-space: nowrap;
+}

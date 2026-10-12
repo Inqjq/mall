@@ -28,6 +28,9 @@ logs/
 
 .DS_Store
 
+# 小程序预览服务 #
+.pai/
+
 # 部署产物 / 敏感文件 #
 deploy/certs/
 deploy/java/*.jar

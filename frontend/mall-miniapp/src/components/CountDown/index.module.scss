@@ -1,0 +1,33 @@
+@use '@/styles/variables.scss' as *;
+
+.wrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+.label {
+  padding: 4rpx 12rpx;
+  border-radius: $radius-xs;
+  background: rgba(255, 124, 0, 0.22);
+  color: #ffc59b;
+  font-size: $font-size-xs;
+  white-space: nowrap;
+}
+
+.prefix {
+  margin-right: 8rpx;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: $font-size-xs;
+  white-space: nowrap;
+}
+
+.time {
+  padding: 4rpx 10rpx;
+  border-radius: $radius-xs;
+  background: rgba(255, 255, 255, 0.16);
+  color: $color-text-white;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 1rpx;
+  white-space: nowrap;
+}
